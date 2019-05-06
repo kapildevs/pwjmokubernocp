@@ -38,13 +38,16 @@ public class OrderItemService {
     }
     public OrderItemDto create(OrderItemDto orderItemDto) {
         log.debug("Request to create OrderItem : {}", orderItemDto);
+
         Order order = this.orderRepository.findById(orderItemDto.getOrderId()).orElseThrow(() -> new IllegalStateException("The Order does not exist!"));
+
         Product product = this.productRepository.findById(orderItemDto.getProductId()).orElseThrow(() -> new IllegalStateException("The Product does not exist!"));
+
         return mapToDto(
                 this.orderItemRepository.save(
                         new OrderItem(
                                 orderItemDto.getQuantity(),
-                                product,
+                                product.getId(),
                                 order
                         )));
     }
@@ -58,7 +61,7 @@ public class OrderItemService {
             return new OrderItemDto(
                     orderItem.getId(),
                     orderItem.getQuantity(),
-                    orderItem.getProduct().getId(),
+                    orderItem.getProductId(),
                     orderItem.getOrder().getId()
             );
         }

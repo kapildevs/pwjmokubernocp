@@ -21,6 +21,10 @@ import java.util.Set;
 @Table(name = "product")
 public class Product extends AbstractEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;

@@ -1,5 +1,6 @@
 package com.targa.labs.order.service;
 
+import com.targa.labs.commons.dto.CartDto;
 import com.targa.labs.customer.domain.Cart;
 import com.targa.labs.order.domain.Order;
 import com.targa.labs.order.domain.enumeration.OrderStatus;
@@ -55,7 +56,23 @@ public class OrderService {
                 )
         );
     }
-    public Order create(Cart cart) {
+
+//    public Order create(CartDto cart) {
+//        log.debug("Request to create Order with a Cart : {}", cart);
+//        return this.orderRepository.save(
+//                new Order(
+//                        BigDecimal.ZERO,
+//                        OrderStatus.CREATION,
+//                        null,
+//                        null,
+//                        null,
+//                        Collections.emptySet(),
+//                        cart.getId()
+//                )
+//        );
+//    }
+
+    public Order createOrder(CartDto cart) {
         log.debug("Request to create Order with a Cart : {}", cart);
         return this.orderRepository.save(
                 new Order(
@@ -65,9 +82,13 @@ public class OrderService {
                         null,
                         null,
                         Collections.emptySet(),
-                        cart
+                        cart.getId()
                 )
         );
+    }
+
+    public OrderDto create(CartDto cart) {
+        return mapToDto(this.createOrder(cart));
     }
     public void delete(Long id) {
         log.debug("Request to delete Order : {}", id);

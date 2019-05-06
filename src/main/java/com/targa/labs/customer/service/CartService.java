@@ -1,5 +1,6 @@
 package com.targa.labs.customer.service;
 
+import com.targa.labs.commons.dto.OrderDto;
 import com.targa.labs.customer.domain.Cart;
 import com.targa.labs.customer.domain.Customer;
 import com.targa.labs.order.domain.Order;
@@ -52,8 +53,8 @@ public class CartService {
                     CartStatus.NEW
             );
 
-            Order order = this.orderService.create(cart);
-            cart.setOrder(order);
+            OrderDto order = this.orderService.create(mapToDto(cart));
+            cart.setOrderId(order.getId());
 
             return mapToDto(this.cartRepository.save(cart));
         } else {
@@ -92,7 +93,7 @@ public class CartService {
         if(cart != null) {
             return new CartDto(
                     cart.getId(),
-                    cart.getOrder().getId(),
+                    cart.getOrderId(),
                     CustomerService.mapToDto(cart.getCustomer()),
                     cart.getStatus().name()
             );

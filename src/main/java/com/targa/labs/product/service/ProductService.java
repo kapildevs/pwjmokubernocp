@@ -39,6 +39,7 @@ public class ProductService {
         log.debug("Request to create Product : {}", productDto);
         return mapToDto(this.productRepository.save(
                 new Product(
+                        productDto.getId(),
                         productDto.getName(),
                         productDto.getDescription(),
                         productDto.getPrice(),

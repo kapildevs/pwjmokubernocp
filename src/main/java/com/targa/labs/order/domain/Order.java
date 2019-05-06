@@ -46,7 +46,9 @@ public class Order extends AbstractEntity {
     @JsonIgnore
     private Set<OrderItem> orderItems;
 
-    @OneToOne(mappedBy = "order")
-    @JsonIgnore
-    private Cart cart;
+//    @OneToOne(mappedBy = "order")
+//    @JsonIgnore
+//    private Cart cart;
+
+    private Long cartId;
 }

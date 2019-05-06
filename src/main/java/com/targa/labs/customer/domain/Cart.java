@@ -21,9 +21,11 @@ public class Cart extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Order order;
+//    @OneToOne
+//    @JoinColumn(unique = true)
+//    private Order order;
+
+    private Long orderId;
 
     @ManyToOne
     private Customer customer;
